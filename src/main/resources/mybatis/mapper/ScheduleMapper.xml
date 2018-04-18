@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.quartz.dao.ScheduleDao">
+    <resultMap id="BaseResultMap" type="com.yang.quartz.entity.ScheduleEntity">
+        <result column="job_group" property="jobGroup" jdbcType="VARCHAR"/>
+        <result column="job_name" property="jobName" jdbcType="VARCHAR"/>
+        <result column="cron_expression" property="cronExpression" jdbcType="VARCHAR"/>
+        <result column="class_name" property="className" jdbcType="VARCHAR"/>
+        <result column="method_name" property="methodName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="listPage" parameterType="com.yang.quartz.entity.ScheduleEntity" resultMap="BaseResultMap">
+        SELECT * from schedule_job where 1=1
+        <if test="scheduleEntity.jobName!=null and scheduleEntity.jobName!='' ">
+            and job_name =#{task.jobName}
+        </if>
+        <if test="scheduleEntity.taskGroup!=null and scheduleEntity.taskGroup!='' ">
+            and task_group =#{task.jobName}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.yang.quartz.entity.ScheduleEntity">
+        INSERT INTO schedule_job (job_group, job_name,  cron_expression,class_name,method_name,description)
+         VALUES (#{jobGroup}, #{jobName},#{cronExpression}, #{className},#{methodName},description);
+    </insert>
+</mapper>

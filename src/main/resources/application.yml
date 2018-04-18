@@ -1,0 +1,36 @@
+
+#server configuration
+server:
+  port: 7001
+  address: localhost
+
+
+#datasource config
+spring.druid.datasource:
+#        url: jdbc:oracle:thin:@192.168.1.48:27101:szy
+#        username: szy
+#        password: Db2016Szy
+#         driver-class-name: oracle.jdbc.driver.OracleDriver
+        url: "jdbc:mysql://localhost:3306/quartz_demo?characterEncoding=utf-8&amp;autoReconnect=true&amp;useUnicode=true&amp;zeroDateTimeBehavior=convertToNull"
+        username: root
+        password: Xie520520.
+        driver-class-name: com.mysql.jdbc.Driver
+         # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+mybatis:
+  mapperLocations: classpath:mybatis/mapper/*.xml
+  typeAliasesPackage: com.yang.quartz.entity.*
